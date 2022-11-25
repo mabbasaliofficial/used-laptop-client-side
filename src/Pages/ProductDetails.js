@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import { FaUserCircle , FaSearchLocation,FaCommentsDollar,FaDollarSign,FaClock,FaPauseCircle} from "react-icons/fa";
+import BuyingModal from "../Components/BuyingModal";
 
 const ProductDetails = () => {
   const product = useLoaderData();
+  const [options, setOptions] = useState(null)
   const {
     _id,
     title,
@@ -34,15 +36,20 @@ const ProductDetails = () => {
                     <span className="mx-2">Post : {post_time}</span>
                 </p>
             </p>
+            {
+                options &&
+                <BuyingModal
+            options={options}
+            ></BuyingModal>}
             <div className="lg:w-1/2 lg:flex">
-              <button className="btn btn-primary lg:m-2 my-2 w-full">Buy Now</button>
+              <label onClick={()=> setOptions(product)} htmlFor="buying-modal" className="btn btn-primary lg:m-2 my-2 w-full">Buy Now</label>
               <button className="btn btn-secondary lg:m-2 my-2 w-full">Wishlist</button>
             </div>
           </div>
         </div>
       </div>
       <div className="divider lg:text-3xl font-bold">Description</div>
-      <div className="border border-purple-400 p-10 rounded-lg">
+      <div className="border border-purple-400 p-10 rounded-lg mt-10">
         <p>{description}</p>
       </div>
     </div>
