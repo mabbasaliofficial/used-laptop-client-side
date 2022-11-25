@@ -1,0 +1,38 @@
+[
+    {
+      "id": "01",
+      "brand_name": "HP Laptop",
+      "description": "We are a technology company born of the belief that companies should do more than just make a profit. They should make the world a better place. Our efforts in climate action, human rights, and digital equity prove that we are doing everything in our power to make it so.",
+      "image": "https://i.ibb.co/LtMyRkk/Hewlett-Packard-Logo-2008-2014.png"
+    },
+    {
+      "id": "02",
+      "brand_name": "DELL Laptop",
+      "description": "Find a broad mix of head-to-head product comparisons, third party competitive research, compelling blogs and customer stories to make an informed purchase decision.",
+      "image": "https://i.ibb.co/Yyw8KrT/Dell-Emblem.jpg"
+    },
+    {
+      "id": "03",
+      "brand_name": "Lenovo Laptop",
+      "description": "Step into our virtual showcase to discover how Lenovo’s solutions can help us achieve our dreams and create a better world.",
+      "image": "https://i.ibb.co/tQy4D8R/600-6002930-lenovo-laptop-logo-hd-png-download.jpg"
+    },
+    {
+      "id": "04",
+      "brand_name": "Asus Laptop",
+      "description": "ASUS is passionate about technology and driven by innovation. We dream, we dare and we strive to create an effortless and joyful digital life for everyone. We're always in search of incredible ideas and experiences, and we aspire to deliver the incredible in everything we do.",
+      "image": "https://i.ibb.co/BrVbxML/91059.jpg"
+    },
+    {
+      "id": "05",
+      "brand_name": "Macbook Laptop",
+      "description": "The completely reimagined store doubles in size, features sustainable design enhancements, and celebrates creativity with special Today at Apple sessions",
+      "image": "https://i.ibb.co/T19NDkC/png-clipart-apple-logo-computer-icons-apple-logo-heart-logo.png"
+    },
+    {
+      "id": "06",
+      "brand_name": "Microsoft Laptop",
+      "description": "Stay informed about Microsoft – from company facts and news to our worldwide locations and more.",
+      "image": "https://i.ibb.co/HnxDYVx/Microsoft-Logo-Featured.jpg"
+    }
+  ]
