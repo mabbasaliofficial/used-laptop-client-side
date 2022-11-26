@@ -7,7 +7,6 @@ const ProductDetails = () => {
   const product = useLoaderData();
   const [options, setOptions] = useState(null)
   const {
-    _id,
     title,
     image,
     description,
