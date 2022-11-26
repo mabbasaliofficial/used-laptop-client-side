@@ -7,6 +7,7 @@ import Login from "../Pages/Login";
 import ProductDetails from "../Pages/ProductDetails";
 import Products from "../Pages/Products";
 import Signup from "../Pages/Signup";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
     {
