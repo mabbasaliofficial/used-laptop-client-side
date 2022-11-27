@@ -1,5 +1,6 @@
 
 import React, { useContext } from "react";
+import toast from "react-hot-toast";
 import { AuthContext } from "../Contexts/AuthProvider";
 
 const BuyingModal = ({ options, setOptions }) => {
@@ -23,6 +24,7 @@ const BuyingModal = ({ options, setOptions }) => {
     }
     console.log(buying)
     setOptions(null)
+    toast.success('Data saved successfully')
 
   }
   return (
