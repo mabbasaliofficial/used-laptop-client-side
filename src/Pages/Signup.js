@@ -1,18 +1,19 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../Contexts/AuthProvider";
 import toast from "react-hot-toast";
 
 const Signup = () => {
   const [signUpError, setSignUpError] = useState("");
+  const navigate = useNavigate()
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
 
-  const { createUser, updateUser } = useContext(AuthContext);
+  const { createUser, updateUser, googleSignIn } = useContext(AuthContext);
 
   const handleSignUp = (data) => {
     setSignUpError("");
@@ -25,13 +26,27 @@ const Signup = () => {
           displayName: data.name,
         };
         updateUser(userInfo)
-          .then(() => {})
+          .then(() => {
+            navigate(`/`)
+          })
           .catch((err) => console.error(err));
       })
       .catch((error) => {
         console.error(error);
         setSignUpError(error.message);
       });
+  };
+
+  const googleLogin = () => {
+    googleSignIn()
+    .then(result => {
+      const user = result.user;
+      console.log(user)
+      navigate(`/`)
+    })
+    .catch(error => {
+      console.error(error)
+    })
   };
   return (
     <div className="h-[720px] flex justify-center items-center">
@@ -98,7 +113,7 @@ const Signup = () => {
             </Link>
           </p>
           <div className="divider">OR</div>
-          <button className="btn  btn-outline btn-secondary">Continue with google</button>
+          <button onClick={googleLogin} className="btn  btn-outline btn-secondary">Continue with google</button>
         </div>
       </div>
     </div>

@@ -1,3 +1,4 @@
+import { error } from "daisyui/src/colors";
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -17,7 +18,7 @@ const Login = () => {
 
   const [loginError, setLoginError] = useState('')
 
-  const {signIn} = useContext(AuthContext);
+  const {signIn, googleSignIn} = useContext(AuthContext);
 
   const handleLogin = (data) => {
     console.log(data);
@@ -33,6 +34,18 @@ const Login = () => {
         setLoginError(error.message)
     });
   };
+
+  const googleLogin = () => {
+    googleSignIn()
+    .then(result => {
+      const user = result.user;
+      console.log(user)
+      navigate(from, {replace: true})
+    })
+    .catch(error => {
+      console.error(error)
+    })
+  }
   return (
     <div className="h-[720px] flex justify-center items-center">
       <div className="card border lg:w-96 md:w-96 w-full shadow-2xl bg-base-100">
@@ -91,7 +104,7 @@ const Login = () => {
             </Link>
           </p>
           <div className="divider">OR</div>
-          <button className="btn  btn-outline btn-secondary">Continue with google</button>
+          <button onClick={googleLogin} className="btn  btn-outline btn-secondary">Continue with google</button>
         </div>
       </div>
     </div>
