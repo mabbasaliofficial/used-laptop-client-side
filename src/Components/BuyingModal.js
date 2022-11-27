@@ -1,13 +1,13 @@
-
+import colorNames from "daisyui/src/colors/colorNames";
 import React, { useContext } from "react";
 import toast from "react-hot-toast";
 import { AuthContext } from "../Contexts/AuthProvider";
 
 const BuyingModal = ({ options, setOptions }) => {
-  const {user} = useContext(AuthContext)
+  const { user } = useContext(AuthContext);
   const { title, resale_price } = options;
-  const handleSubmit = event => {
-    event.preventDefault()
+  const handleSubmit = (event) => {
+    event.preventDefault();
     const form = event.target;
     const name = form.name.value;
     const email = form.email.value;
@@ -21,12 +21,25 @@ const BuyingModal = ({ options, setOptions }) => {
       price: price,
       phone: phone,
       location: location,
-    }
-    console.log(buying)
-    setOptions(null)
-    toast.success('Data saved successfully')
-
-  }
+    };
+    console.log(buying);
+    fetch("http://localhost:5000/buying", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(buying),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.acknowledged) {
+          
+          setOptions(null);
+          toast.success("Data saved successfully");
+        }
+      });
+  };
   return (
     <>
       <input type="checkbox" id="buying-modal" className="modal-toggle" />
@@ -37,11 +50,41 @@ const BuyingModal = ({ options, setOptions }) => {
           </label>
           <h3 className="text-3xl font-bold text-center">{title}</h3>
           <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-3 my-5">
-              <input type="text" name="name" value={user.displayName} disabled className="input input-bordered w-full" />
-              <input type="text" name="email" value={user.email} disabled className="input input-bordered w-full" />
-              <input type="text" name="price" value={resale_price} disabled className="input input-bordered w-full" />
-              <input type="text" name="phone" placeholder="Your Phone"  className="input input-bordered w-full" required/>
-              <input type="text" name="location" placeholder="Your Location" className="input input-bordered w-full" required/>
+            <input
+              type="text"
+              name="name"
+              value={user.displayName}
+              disabled
+              className="input input-bordered w-full"
+            />
+            <input
+              type="text"
+              name="email"
+              value={user.email}
+              disabled
+              className="input input-bordered w-full"
+            />
+            <input
+              type="text"
+              name="price"
+              value={resale_price}
+              disabled
+              className="input input-bordered w-full"
+            />
+            <input
+              type="text"
+              name="phone"
+              placeholder="Your Phone"
+              className="input input-bordered w-full"
+              required
+            />
+            <input
+              type="text"
+              name="location"
+              placeholder="Your Location"
+              className="input input-bordered w-full"
+              required
+            />
             <input className="btn btn-primary w-full" type="submit" value="Submit" />
           </form>
         </div>

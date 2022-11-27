@@ -10,7 +10,6 @@ import {
   updateProfile,
 } from "firebase/auth";
 import app from "../Config/firebaseConfig";
-import colorNames from "daisyui/src/colors/colorNames";
 
 export const AuthContext = createContext();
 const auth = getAuth(app);
