@@ -24,12 +24,14 @@ const ProductDetails = () => {
     post_time,
     year_of_use,
   } = product;
+  
   return (
     <div className="bg-base-200 lg:p-10">
       <div className="hero min-h-screen">
         <div className="hero-content flex-col lg:flex-row">
           <img src={image} className="lg:w-1/2 rounded-lg shadow-2xl" alt="" />
           <div>
+            
             <h1 className="lg:text-4xl text-xl md:text-2xl  font-bold">{title}</h1>
             <p className="py-10">
               <p className=" flex items-center m-1">
