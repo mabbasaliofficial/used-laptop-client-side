@@ -33,6 +33,8 @@ const MyBooking = () => {
           </thead>
           <tbody>
             { 
+            
+            buying?.length &&
                 buying.map((item, i) => <tr key={item._id}>
                     <th>
                       {i+1}
