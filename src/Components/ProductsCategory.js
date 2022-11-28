@@ -3,11 +3,13 @@ import React from "react";
 import CategoryCard from "./CategoryCard";
 
 const ProductsCategory = () => {
-  const { data: categories = [] } = useQuery({
+  const { data: categories = [], isLoading } = useQuery({
     queryKey: ["productsCategory"],
     queryFn: () => fetch("http://localhost:5000/productsCategory").then((res) => res.json()),
   });
-
+  if(isLoading){
+    return <progress className="progress w-full"></progress>;
+}
   return (
     <section className="mt-10">
       <div className="divider">

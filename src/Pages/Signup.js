@@ -3,10 +3,17 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../Contexts/AuthProvider";
 import toast from "react-hot-toast";
+import useToken from "../Hooks/useToken";
 
 const Signup = () => {
   const [signUpError, setSignUpError] = useState("");
   const navigate = useNavigate()
+  const [createUserEmail, setCreateUserEmail] = useState('')
+  const [token] = useToken(createUserEmail)
+
+  if(token){
+    navigate(`/`)
+  }
   const {
     register,
     formState: { errors },
@@ -27,7 +34,7 @@ const Signup = () => {
         };
         updateUser(userInfo)
           .then(() => {
-            navigate(`/`)
+            saveUserToDB(data.name, data.email)
           })
           .catch((err) => console.error(err));
       })
@@ -36,6 +43,23 @@ const Signup = () => {
         setSignUpError(error.message);
       });
   };
+
+  const saveUserToDB = (name, email) => {
+    const user = {name, email}
+    fetch('http://localhost:5000/users', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify(user)
+    })
+    .then(res => res.json())
+    .then(data => {
+      setCreateUserEmail(email)
+    })
+  }
+
+  
 
   const googleLogin = () => {
     googleSignIn()

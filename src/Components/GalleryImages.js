@@ -56,8 +56,9 @@ const GalleryImages = () => {
   ];
   return (
     <div className="grid gap-2 grid-cols-1 md:grid-cols-2 lg:grid-cols-5 mt-10">
-      {images.map((item) => (
+      {images.map((item, i) => (
         <PhotoProvider
+        key={i}
         speed={() => 1000}
         easing={(type) => (type === 2 ? 'cubic-bezier(0.36, 0, 0.66, -0.56)' : 'cubic-bezier(0.34, 1.56, 0.64, 1)')}
       >
