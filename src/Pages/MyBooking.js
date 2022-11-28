@@ -32,7 +32,7 @@ const MyBooking = () => {
             </tr>
           </thead>
           <tbody>
-            {
+            { 
                 buying.map((item, i) => <tr key={item._id}>
                     <th>
                       {i+1}
@@ -41,7 +41,7 @@ const MyBooking = () => {
                       <div className="flex items-center space-x-3">
                         <div>
                           <div className="font-bold">{item.buyer}</div>
-                          <div className="text-sm opacity-50">{item.location}</div>
+                          <div className="text-xs opacity-100">{item.email}</div>
                         </div>
                       </div>
                     </td>

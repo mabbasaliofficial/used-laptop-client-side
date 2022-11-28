@@ -1,8 +1,8 @@
-
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Contexts/AuthProvider";
+import useToken from "../Hooks/useToken";
 
 const Login = () => {
   const {
@@ -11,41 +11,47 @@ const Login = () => {
     handleSubmit,
   } = useForm();
 
+  const [loginUserEmail, setLoginUserEmail] = useState("");
+  const [token] = useToken(loginUserEmail);
   const location = useLocation();
   const navigate = useNavigate();
 
-  const from = location.state?.from?.pathname || '/';
+  const from = location.state?.from?.pathname || "/";
 
-  const [loginError, setLoginError] = useState('')
+  if (token) {
+    navigate(from, { replace: true });
+  }
 
-  const {signIn, googleSignIn} = useContext(AuthContext);
+  const [loginError, setLoginError] = useState("");
+
+  const { signIn, googleSignIn } = useContext(AuthContext);
 
   const handleLogin = (data) => {
     console.log(data);
-    setLoginError('')
+    setLoginError("");
     signIn(data.email, data.password)
-    .then(result => {
+      .then((result) => {
         const user = result.user;
-        console.log(user)
-        navigate(from, {replace: true})
-    })
-    .catch( error => {
-        console.error(error.message)
-        setLoginError(error.message)
-    });
+        console.log(user);
+        setLoginUserEmail(data.email);
+      })
+      .catch((error) => {
+        console.error(error.message);
+        setLoginError(error.message);
+      });
   };
 
   const googleLogin = () => {
     googleSignIn()
-    .then(result => {
-      const user = result.user;
-      console.log(user)
-      navigate(from, {replace: true})
-    })
-    .catch(error => {
-      console.error(error)
-    })
-  }
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        navigate(from, { replace: true });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
   return (
     <div className="h-[720px] flex justify-center items-center">
       <div className="card border lg:w-96 md:w-96 w-full shadow-2xl bg-base-100">
@@ -88,11 +94,7 @@ const Login = () => {
                 </Link>
               </label>
             </div>
-            {
-                loginError &&
-                <label className="label label-text-alt text-error">
-               {loginError}
-              </label>}
+            {loginError && <label className="label label-text-alt text-error">{loginError}</label>}
             <div className="form-control mt-6">
               <input className="btn btn-primary" type="submit" value="Login" />
             </div>
@@ -104,7 +106,9 @@ const Login = () => {
             </Link>
           </p>
           <div className="divider">OR</div>
-          <button onClick={googleLogin} className="btn  btn-outline btn-secondary">Continue with google</button>
+          <button onClick={googleLogin} className="btn  btn-outline btn-secondary">
+            Continue with google
+          </button>
         </div>
       </div>
     </div>

@@ -2,11 +2,11 @@ import { createBrowserRouter } from "react-router-dom";
 import Dashboard from "../Layouts/Dashboard";
 import Main from "../Layouts/Main";
 import Blogs from "../Pages/Blogs";
-import DashboardPage from "../Pages/DashboardPage";
 import ErrorPage from "../Pages/ErrorPage";
 import Home from "../Pages/Home";
 import Login from "../Pages/Login";
 import MyBooking from "../Pages/MyBooking";
+import AllUsers from "../Pages/AllUsers";
 import ProductDetails from "../Pages/ProductDetails";
 import Products from "../Pages/Products";
 import Signup from "../Pages/Signup";
@@ -52,6 +52,10 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard',
                 element: <MyBooking/>,
+            },
+            {
+                path: '/dashboard/allusers',
+                element: <AllUsers/>,
             }
         ]
     },
