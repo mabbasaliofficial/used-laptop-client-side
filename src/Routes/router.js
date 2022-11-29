@@ -12,6 +12,7 @@ import Products from "../Pages/Products";
 import Signup from "../Pages/Signup";
 import PrivateRoute from "./PrivateRoute";
 import AdminRoute from "./AdminRoute";
+import AllSeller from "../Pages/AllSeller";
 
 const router = createBrowserRouter([
     {
@@ -57,7 +58,11 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard/allusers',
                 element: <AdminRoute><AllUsers/></AdminRoute>,
-            }
+            },
+            {
+                path: '/dashboard/allseller',
+                element: <AdminRoute><AllSeller/></AdminRoute>,
+            },
         ]
     },
     {

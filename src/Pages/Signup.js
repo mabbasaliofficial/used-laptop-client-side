@@ -7,12 +7,12 @@ import useToken from "../Hooks/useToken";
 
 const Signup = () => {
   const [signUpError, setSignUpError] = useState("");
-  const navigate = useNavigate()
-  const [createUserEmail, setCreateUserEmail] = useState('')
-  const [token] = useToken(createUserEmail)
+  const navigate = useNavigate();
+  const [createUserEmail, setCreateUserEmail] = useState("");
+  const [token] = useToken(createUserEmail);
 
-  if(token){
-    navigate(`/`)
+  if (token) {
+    navigate(`/`);
   }
   const {
     register,
@@ -23,6 +23,7 @@ const Signup = () => {
   const { createUser, updateUser, googleSignIn } = useContext(AuthContext);
 
   const handleSignUp = (data) => {
+    console.log(data.role);
     setSignUpError("");
     createUser(data.email, data.password)
       .then((result) => {
@@ -34,7 +35,7 @@ const Signup = () => {
         };
         updateUser(userInfo)
           .then(() => {
-            saveUserToDB(data.name, data.email)
+            saveUserToDB(data.name, data.email, data.role);
           })
           .catch((err) => console.error(err));
       })
@@ -44,33 +45,31 @@ const Signup = () => {
       });
   };
 
-  const saveUserToDB = (name, email) => {
-    const user = {name, email}
-    fetch('http://localhost:5000/users', {
-      method: 'POST',
+  const saveUserToDB = (name, email, role) => {
+    const user = { name, email, role };
+    fetch("http://localhost:5000/users", {
+      method: "POST",
       headers: {
-        'content-type': 'application/json',
+        "content-type": "application/json",
       },
-      body: JSON.stringify(user)
+      body: JSON.stringify(user),
     })
-    .then(res => res.json())
-    .then(data => {
-      setCreateUserEmail(email)
-    })
-  }
-
-  
+      .then((res) => res.json())
+      .then((data) => {
+        setCreateUserEmail(email);
+      });
+  };
 
   const googleLogin = () => {
     googleSignIn()
-    .then(result => {
-      const user = result.user;
-      console.log(user)
-      navigate(`/`)
-    })
-    .catch(error => {
-      console.error(error)
-    })
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        navigate(`/`);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
   return (
     <div className="h-[720px] flex justify-center items-center">
@@ -78,6 +77,9 @@ const Signup = () => {
         <div className="card-body">
           <form onSubmit={handleSubmit(handleSignUp)}>
             <h1 className="text-3xl font-bold text-center">Sign Up</h1>
+            {signUpError && (
+              <p className="text-error text-center">{signUpError}</p>
+            )}
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Name</span>
@@ -123,9 +125,18 @@ const Signup = () => {
                 <label className="label label-text-alt text-error">{errors.password.message}</label>
               )}
             </div>
-            {signUpError && (
-              <label className="label label-text-alt text-error">{signUpError}</label>
-            )}
+            <div className="form-control w-full max-w-xs">
+              <label className="label">
+                <span className="label-text">Account Type</span>
+              </label>
+              <select className="select select-bordered" {...register("role")} required>
+                <option disabled>Select Your Role</option>
+                <option value="buyer">Buyer</option>
+                <option value="seller">Seller</option>
+              </select>
+            </div>
+
+            
             <div className="form-control mt-6">
               <input className="btn btn-primary" type="submit" value="Sign Up" />
             </div>
@@ -137,7 +148,9 @@ const Signup = () => {
             </Link>
           </p>
           <div className="divider">OR</div>
-          <button onClick={googleLogin} className="btn  btn-outline btn-secondary">Continue with google</button>
+          <button onClick={googleLogin} className="btn  btn-outline btn-secondary">
+            Continue with google
+          </button>
         </div>
       </div>
     </div>

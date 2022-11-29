@@ -58,6 +58,7 @@ const Login = () => {
         <div className="card-body">
           <form onSubmit={handleSubmit(handleLogin)}>
             <h1 className="text-3xl font-bold text-center">Login</h1>
+            {loginError && <p className="text-center text-error">{loginError}</p>}
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Email</span>
@@ -94,7 +95,7 @@ const Login = () => {
                 </Link>
               </label>
             </div>
-            {loginError && <label className="label label-text-alt text-error">{loginError}</label>}
+            
             <div className="form-control mt-6">
               <input className="btn btn-primary" type="submit" value="Login" />
             </div>
