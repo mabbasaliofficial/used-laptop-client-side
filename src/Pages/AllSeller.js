@@ -61,7 +61,7 @@ const AllSeller = () => {
                 <th>{i + 1}</th>
                 <td>
                     <div>
-                      <div className="font-bold">{user.name}</div>
+                      <div className="font-bold">{user.displayName}</div>
                     </div>
                 </td>
                 <td>

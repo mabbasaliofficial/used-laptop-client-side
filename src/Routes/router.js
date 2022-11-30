@@ -14,6 +14,13 @@ import PrivateRoute from "./PrivateRoute";
 import AdminRoute from "./AdminRoute";
 import AllSeller from "../Pages/AllSeller";
 import AllBuyer from "../Pages/AllBuyer";
+import PaymentPage from "../Pages/PaymentPage";
+import SellerRoute from "./SellerRoute";
+import AddProducts from "../Pages/AddProducts";
+import MyProducts from "../Pages/MyProducts";
+import MyBuyer from "../Pages/MyBuyer";
+import UserProfile from "../Pages/UserProfile";
+import BuyerRoute from "./BuyerRoute";
 
 const router = createBrowserRouter([
     {
@@ -54,7 +61,12 @@ const router = createBrowserRouter([
         children: [
             {
                 path: '/dashboard',
-                element: <MyBooking/>,
+                element: <UserProfile/>,
+            },
+            {
+                path: '/dashboard/payment/:id',
+                element: <PaymentPage/>,
+                loader: ({params})=> fetch(`http://localhost:5000/buying/${params.id}`)
             },
             {
                 path: '/dashboard/allusers',
@@ -68,6 +80,22 @@ const router = createBrowserRouter([
                 path: '/dashboard/allbuyer',
                 element: <AdminRoute><AllBuyer/></AdminRoute>,
             },
+            {
+                path: '/dashboard/addproducts',
+                element: <SellerRoute><AddProducts/></SellerRoute>
+            },
+            {
+                path: '/dashboard/myproducts',
+                element: <SellerRoute><MyProducts/></SellerRoute>
+            },
+            {
+                path: '/dashboard/mybuyers',
+                element: <SellerRoute><MyBuyer/></SellerRoute>
+            },
+            {
+                path: '/dashboard/myorders',
+                element: <BuyerRoute><MyBooking/></BuyerRoute>
+            }
         ]
     },
     {

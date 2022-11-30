@@ -5,7 +5,7 @@ import { AuthContext } from "../Contexts/AuthProvider";
 
 const BuyingModal = ({ options, setOptions }) => {
   const { user } = useContext(AuthContext);
-  const { title, resale_price, year_of_use } = options;
+  const { title, resale_price, condition } = options;
   const handleSubmit = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -21,7 +21,7 @@ const BuyingModal = ({ options, setOptions }) => {
       price: price,
       phone: phone,
       location: location,
-      condition: year_of_use,
+      condition: condition,
     };
     console.log(buying);
     fetch("http://localhost:5000/buying", {

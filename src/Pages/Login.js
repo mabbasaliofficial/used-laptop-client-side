@@ -41,11 +41,26 @@ const Login = () => {
       });
   };
 
+  const saveUserToDB = (displayName, email, role) => {
+    const user = { displayName, email, role };
+    fetch("http://localhost:5000/users", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(user),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+
+      });
+  };
+
   const googleLogin = () => {
     googleSignIn()
       .then((result) => {
         const user = result.user;
-        console.log(user);
+        saveUserToDB(user.displayName, user.email, "buyer");
         navigate(from, { replace: true });
       })
       .catch((error) => {

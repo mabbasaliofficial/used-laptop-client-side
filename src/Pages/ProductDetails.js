@@ -22,7 +22,7 @@ const ProductDetails = () => {
     original_price,
     resale_price,
     post_time,
-    year_of_use,
+    condition,
   } = product;
   
   return (
@@ -51,7 +51,7 @@ const ProductDetails = () => {
               </p>
               <p className="flex items-center m-1">
                 <FaPauseCircle />
-                <span className="mx-2">Condition : {year_of_use} Years Used</span>
+                <span className="mx-2">Condition : {condition}</span>
               </p>
               <p className="flex items-center m-1">
                 <FaClock />

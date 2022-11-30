@@ -45,8 +45,8 @@ const Signup = () => {
       });
   };
 
-  const saveUserToDB = (name, email, role) => {
-    const user = { name, email, role };
+  const saveUserToDB = (displayName, email, role) => {
+    const user = { displayName, email, role };
     fetch("http://localhost:5000/users", {
       method: "POST",
       headers: {
@@ -64,7 +64,7 @@ const Signup = () => {
     googleSignIn()
       .then((result) => {
         const user = result.user;
-        console.log(user);
+        saveUserToDB(user.displayName, user.email, "buyer");
         navigate(`/`);
       })
       .catch((error) => {
