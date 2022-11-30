@@ -13,7 +13,7 @@ const AllSeller = () => {
     },
   });
 
-  const handleMakeAdmin = id => {
+  const handleVerifySeller = id => {
     fetch(`http://localhost:5000/users/seller/${id}`, {
         method: 'PUT',
         headers: {
@@ -69,7 +69,7 @@ const AllSeller = () => {
                   
                 </td>
                 <td>{ user?.verify  !== 'verified' ?
-                    <button onClick={()=> handleMakeAdmin(user._id)} className=" tooltip tooltip-primary text-4xl text-center text-primary" data-tip="Verify Seller?"><FaQuestionCircle/></button> : <div className="tooltip tooltip-secondary" data-tip="Already Verified">
+                    <button onClick={()=> handleVerifySeller(user._id)} className=" tooltip tooltip-primary text-4xl text-center text-primary" data-tip="Verify Seller?"><FaQuestionCircle/></button> : <div className="tooltip tooltip-secondary" data-tip="Already Verified">
                     <span className="text-4xl text-center text-secondary"><FaInfoCircle/></span>
                   </div>}</td>
                 <td>

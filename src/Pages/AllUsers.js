@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import toast from "react-hot-toast";
-import { FaInfoCircle, FaTrashAlt ,FaCheckCircle, FaQuestionCircle} from "react-icons/fa";
+import { FaInfoCircle, FaTrashAlt , FaQuestionCircle} from "react-icons/fa";
 
 const AllUsers = () => {
   const { data: users = [], refetch } = useQuery({

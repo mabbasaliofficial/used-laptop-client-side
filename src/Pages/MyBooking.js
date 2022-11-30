@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useContext } from "react";
+import { FaMoneyCheckAlt } from "react-icons/fa";
 import { AuthContext } from "../Contexts/AuthProvider";
 
 const MyBooking = () => {
@@ -28,7 +29,7 @@ const MyBooking = () => {
               <th>Name</th>
               <th>Products</th>
               <th>Price</th>
-              <th></th>
+              <th>Payment</th>
             </tr>
           </thead>
           <tbody>
@@ -53,9 +54,9 @@ const MyBooking = () => {
                       <span className="badge badge-ghost badge-sm">{item.condition} Years Used</span>
                     </td>
                     <td>{item.price}TK</td>
-                    <th>
-                      <button className="btn btn-ghost btn-xs">details</button>
-                    </th>
+                    <td>
+                    <button  className=" tooltip tooltip-secondary text-4xl text-center text-secondary" data-tip="Payment Now..."><FaMoneyCheckAlt/></button>
+                </td>
                   </tr>)
             }
           </tbody>
