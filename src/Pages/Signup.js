@@ -4,8 +4,10 @@ import { useForm } from "react-hook-form";
 import { AuthContext } from "../Contexts/AuthProvider";
 import toast from "react-hot-toast";
 import useToken from "../Hooks/useToken";
+import useTitle from "../Hooks/useTitle";
 
 const Signup = () => {
+  useTitle('Sign Up');
   const [signUpError, setSignUpError] = useState("");
   const navigate = useNavigate();
   const [createUserEmail, setCreateUserEmail] = useState("");
@@ -47,7 +49,7 @@ const Signup = () => {
 
   const saveUserToDB = (displayName, email, role) => {
     const user = { displayName, email, role };
-    fetch("http://localhost:5000/users", {
+    fetch("https://laptop-data.vercel.app/users", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -77,9 +79,7 @@ const Signup = () => {
         <div className="card-body">
           <form onSubmit={handleSubmit(handleSignUp)}>
             <h1 className="text-3xl font-bold text-center">Sign Up</h1>
-            {signUpError && (
-              <p className="text-error text-center">{signUpError}</p>
-            )}
+            {signUpError && <p className="text-error text-center">{signUpError}</p>}
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Name</span>
@@ -136,7 +136,6 @@ const Signup = () => {
               </select>
             </div>
 
-            
             <div className="form-control mt-6">
               <input className="btn btn-primary" type="submit" value="Sign Up" />
             </div>

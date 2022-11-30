@@ -1,13 +1,13 @@
 import React from 'react';
 import useTitle from '../Hooks/useTitle';
 
-const MyProducts = () => {
-    useTitle('My Products');
+const MyWishList = () => {
+    useTitle('My Wish List');
     return (
         <div>
-            my products
+            with
         </div>
     );
 };
 
-export default MyProducts;
+export default MyWishList;

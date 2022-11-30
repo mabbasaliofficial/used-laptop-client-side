@@ -2,9 +2,11 @@ import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Contexts/AuthProvider";
+import useTitle from "../Hooks/useTitle";
 import useToken from "../Hooks/useToken";
 
 const Login = () => {
+  useTitle('Login');
   const {
     register,
     formState: { errors },
@@ -43,7 +45,7 @@ const Login = () => {
 
   const saveUserToDB = (displayName, email, role) => {
     const user = { displayName, email, role };
-    fetch("http://localhost:5000/users", {
+    fetch("https://laptop-data.vercel.app/users", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -51,9 +53,7 @@ const Login = () => {
       body: JSON.stringify(user),
     })
       .then((res) => res.json())
-      .then((data) => {
-
-      });
+      .then((data) => {});
   };
 
   const googleLogin = () => {
@@ -110,7 +110,7 @@ const Login = () => {
                 </Link>
               </label>
             </div>
-            
+
             <div className="form-control mt-6">
               <input className="btn btn-primary" type="submit" value="Login" />
             </div>

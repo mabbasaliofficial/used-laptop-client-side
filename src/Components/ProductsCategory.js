@@ -5,11 +5,12 @@ import CategoryCard from "./CategoryCard";
 const ProductsCategory = () => {
   const { data: categories = [], isLoading } = useQuery({
     queryKey: ["productsCategory"],
-    queryFn: () => fetch("http://localhost:5000/productsCategory").then((res) => res.json()),
+    queryFn: () =>
+      fetch("https://laptop-data.vercel.app/productsCategory").then((res) => res.json()),
   });
-  if(isLoading){
+  if (isLoading) {
     return <progress className="progress w-full"></progress>;
-}
+  }
   return (
     <section className="mt-10">
       <div className="divider">

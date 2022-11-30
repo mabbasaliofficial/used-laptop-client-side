@@ -24,7 +24,7 @@ const BuyingModal = ({ options, setOptions }) => {
       condition: condition,
     };
     console.log(buying);
-    fetch("http://localhost:5000/buying", {
+    fetch("https://laptop-data.vercel.app/buying", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -35,7 +35,6 @@ const BuyingModal = ({ options, setOptions }) => {
       .then((data) => {
         console.log(data);
         if (data.acknowledged) {
-          
           setOptions(null);
           toast.success("Data saved successfully");
         }

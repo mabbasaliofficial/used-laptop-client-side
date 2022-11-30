@@ -9,8 +9,10 @@ import {
   FaPauseCircle,
 } from "react-icons/fa";
 import BuyingModal from "../Components/BuyingModal";
+import useTitle from "../Hooks/useTitle";
 
 const ProductDetails = () => {
+  useTitle('Product Details');
   const product = useLoaderData();
   const [options, setOptions] = useState(null);
   const {
@@ -35,7 +37,7 @@ const ProductDetails = () => {
             <h1 className="lg:text-4xl text-xl md:text-2xl  font-bold">{title}</h1>
             <p className="py-10">
               <p className=" flex items-center m-1">
-                <FaUserCircle /> <span className="mx-2"> Seller : {seller}</span>
+                <FaUserCircle /> {<><span className="mx-2"> Seller : {seller}</span></>}
               </p>
               <p className="  flex items-center m-1">
                 {" "}

@@ -1,6 +1,6 @@
 # Laptop Showcase
 
-My Website Link Is [Laptop Showcase](https://prescription-a7d6b.web.app/).
+My Website Link Is [Laptop Showcase](https://laptop-showcase.web.app/).
 
 
 ### My Website Details

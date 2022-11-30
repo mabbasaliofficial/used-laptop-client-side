@@ -10,7 +10,6 @@ const Banner = () => {
     <div className="max-w-md">
       <h1 className="mb-5 text-5xl font-bold">Mega Deals</h1>
       <p className="mb-5">At the end of the year there are attractive offers for everyone. You will get every product at a very low price from us. So without further delay make your shopping list now.</p>
-      <Link to={`/products`} className="btn btn-primary">Shop Now</Link>
     </div>
   </div>
 </div>

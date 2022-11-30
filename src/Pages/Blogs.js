@@ -1,6 +1,8 @@
 import React from "react";
+import useTitle from "../Hooks/useTitle";
 
 const Blogs = () => {
+  useTitle('Blogs');
   return (
     <div className="border border-primary rounded m-2 p-2 lg:m-5 lg:p-5">
       <div className="border border-primary rounded m-2 p-2 lg:m-5 lg:p-5">
