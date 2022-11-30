@@ -1,5 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import useTitle from "../Hooks/useTitle";
 
 const AddProducts = () => {
@@ -47,7 +48,9 @@ const AddProducts = () => {
           })
             .then((res) => res.json())
             .then((data) => {
-              console.log(data);
+              
+                toast.success('Product Added Successfully')
+              
             });
         }
       });
