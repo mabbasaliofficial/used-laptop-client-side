@@ -2,6 +2,9 @@
 
 My Website Link Is [Laptop Showcase](https://laptop-showcase.web.app/).
 
+adminEmail: <abbas@ali.com>
+adminPassword: <123456>
+
 
 ### My Website Details
 
