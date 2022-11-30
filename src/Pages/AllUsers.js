@@ -1,8 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
-import { data } from "autoprefixer";
 import React from "react";
 import toast from "react-hot-toast";
-import { FaInfoCircle, FaTrashAlt } from "react-icons/fa";
+import { FaInfoCircle, FaTrashAlt ,FaCheckCircle, FaQuestionCircle} from "react-icons/fa";
 
 const AllUsers = () => {
   const { data: users = [], refetch } = useQuery({
@@ -70,12 +69,12 @@ const AllUsers = () => {
                   
                 </td>
                 <td>{ user?.role  !== 'admin' ?
-                    <button onClick={()=> handleMakeAdmin(user._id)} className="btn">Admin</button> : <div className="tooltip tooltip-primary" data-tip="Already Admin">
-                    <span className="text-3xl text-center text-primary"><FaInfoCircle/></span>
+                    <button onClick={()=> handleMakeAdmin(user._id)} className=" tooltip tooltip-primary text-4xl text-center text-primary" data-tip="Make Admin?"><FaQuestionCircle/></button> : <div className="tooltip tooltip-secondary" data-tip="Already Admin">
+                    <span className="text-4xl text-center text-secondary"><FaInfoCircle/></span>
                   </div>}</td>
-                <th>
-                  <button onClick={()=> handleDelete(user._id)} className="btn-outline p-2 rounded-full" ><FaTrashAlt className="text-error text-2xl"/></button>
-                </th>
+                <td>
+                  <button onClick={()=> handleDelete(user._id)} className="btn-outline p-2 rounded-full tooltip tooltip-error" data-tip="Delete User?"><FaTrashAlt className="text-error text-2xl"/></button>
+                </td>
               </tr>
             ))}
           </tbody>

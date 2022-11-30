@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import toast from "react-hot-toast";
+import { FaInfoCircle, FaQuestionCircle, FaTrashAlt } from "react-icons/fa";
 
 const AllSeller = () => {
   const { data: seller = [], refetch } = useQuery({
@@ -13,7 +14,7 @@ const AllSeller = () => {
   });
 
   const handleMakeAdmin = id => {
-    fetch(`http://localhost:5000/users/admin/${id}`, {
+    fetch(`http://localhost:5000/users/seller/${id}`, {
         method: 'PUT',
         headers: {
             authorization: `bearer ${localStorage.getItem('accessToken')}`
@@ -22,9 +23,21 @@ const AllSeller = () => {
     .then(res => res.json())
     .then(data => {
         if(data.modifiedCount > 0){
-            toast.success('Make Admin Successfully');
+            toast.success('Seller Verified Successfully');
             refetch()
         }
+    })
+  }
+  const handleDelete = id => {
+    fetch(`http://localhost:5000/users/${id}`, {
+      method: 'DELETE',
+    })
+    .then(res => res.json())
+    .then(data => {
+      if(data.deletedCount > 0){
+        toast.success('Delete Successfully');
+        refetch()
+    }
     })
   }
   return (
@@ -36,8 +49,8 @@ const AllSeller = () => {
             <tr>
               <th></th>
               <th>Name</th>
-              <th>User</th>
-              <th>Admin</th>
+              <th>Email</th>
+              <th>Verify</th>
               <th>Delete</th>
             </tr>
           </thead>
@@ -49,19 +62,19 @@ const AllSeller = () => {
                 <td>
                     <div>
                       <div className="font-bold">{user.name}</div>
-                      <div className="text-xs opacity-100">{user.email}</div>
                     </div>
                 </td>
                 <td>
-                  Zemlak, Daniel and Leannon
-                  <br />
-                  <span className="badge badge-ghost badge-sm">Desktop Support Technician</span>
+                      <div className="text-xs opacity-100">{user.email}</div>
+                  
                 </td>
-                <td>{ user?.role !== 'admin' &&
-                    <button onClick={()=> handleMakeAdmin(user._id)} className="btn">Admin</button>}</td>
-                <th>
-                  <button className="btn">Delete</button>
-                </th>
+                <td>{ user?.verify  !== 'verified' ?
+                    <button onClick={()=> handleMakeAdmin(user._id)} className=" tooltip tooltip-primary text-4xl text-center text-primary" data-tip="Verify Seller?"><FaQuestionCircle/></button> : <div className="tooltip tooltip-secondary" data-tip="Already Verified">
+                    <span className="text-4xl text-center text-secondary"><FaInfoCircle/></span>
+                  </div>}</td>
+                <td>
+                <button onClick={()=> handleDelete(user._id)} className="btn-outline p-2 rounded-full tooltip tooltip-error" data-tip="Delete Seller?"><FaTrashAlt className="text-error text-2xl"/></button>
+                </td>
               </tr>
             ))}
           </tbody>
