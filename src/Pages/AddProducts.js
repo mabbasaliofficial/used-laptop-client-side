@@ -3,8 +3,8 @@ import { useForm } from "react-hook-form";
 import useTitle from "../Hooks/useTitle";
 
 const AddProducts = () => {
-  useTitle('Add Products');
- const imgHostKey = process.env.REACT_APP_imgbb_key;
+  useTitle("Add Products");
+  const imgHostKey = process.env.REACT_APP_imgbb_key;
   const {
     register,
     formState: { errors },
@@ -14,44 +14,43 @@ const AddProducts = () => {
   const handleProducts = (data) => {
     const image = data.image[0];
     const formData = new FormData();
-    formData.append('image', image);
-    const url = `https://api.imgbb.com/1/upload?expiration=600&key=${imgHostKey}`
+    formData.append("image", image);
+    const url = `https://api.imgbb.com/1/upload?expiration=600&key=${imgHostKey}`;
     fetch(url, {
-      method: 'POST',
-      body: formData
+      method: "POST",
+      body: formData,
     })
-    .then(res => res.json())
-    .then(imgData => {
-      if(imgData.success){
-        console.log(imgData.data.url)
-        const product = {
-          category_id: data.category_id,
-          title: data.title,
-          description: data.description,
-          resale_price: data.resale_price,
-          original_price: data.original_price,
-          seller: data.seller,
-          email: data.email,
-          image: imgData.data.url,
-          location: data.location,
-          post_time: data.post_time,
-          condition: data.condition,
+      .then((res) => res.json())
+      .then((imgData) => {
+        if (imgData.success) {
+          console.log(imgData.data.url);
+          const product = {
+            category_id: data.category_id,
+            title: data.title,
+            description: data.description,
+            resale_price: data.resale_price,
+            original_price: data.original_price,
+            seller: data.seller,
+            email: data.email,
+            image: imgData.data.url,
+            location: data.location,
+            post_time: data.post_time,
+            condition: data.condition,
+          };
+
+          fetch("https://laptop-data.vercel.app/product", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(product),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              console.log(data);
+            });
         }
-
-        fetch('http://localhost:5000/product', {
-          method: 'POST',
-          headers: {
-            'content-type': 'application/json'
-          },
-          body: JSON.stringify(product)
-        })
-        .then(res => res.json())
-        .then(data => {
-          console.log(data)
-        })
-      }
-    })
-
+      });
   };
 
   return (
@@ -159,33 +158,37 @@ const AddProducts = () => {
               </div>
             </div>
             <div className="flex justify-between">
-            <div className="form-control w-1/2 mr-2">
-              <label className="label">
-                <span className="label-text">Date</span>
-              </label>
-              <input
-                type="text"
-                {...register("post_time", { required: "Date is required" })}
-                className="input input-bordered"
-                placeholder="Today's date"
-              />
-            </div>
-            <div className="form-control w-1/2 ml-2">
-              <label className="label">
-                <span className="label-text">Photo</span>
-              </label>
-              <input
-                type="file"
-                {...register("image", { required: "Image is required" })}
-                className="file-input file-input-bordered file-input-primary w-full"
-              />
-            </div>
+              <div className="form-control w-1/2 mr-2">
+                <label className="label">
+                  <span className="label-text">Date</span>
+                </label>
+                <input
+                  type="text"
+                  {...register("post_time", { required: "Date is required" })}
+                  className="input input-bordered"
+                  placeholder="Today's date"
+                />
+              </div>
+              <div className="form-control w-1/2 ml-2">
+                <label className="label">
+                  <span className="label-text">Photo</span>
+                </label>
+                <input
+                  type="file"
+                  {...register("image", { required: "Image is required" })}
+                  className="file-input file-input-bordered file-input-primary w-full"
+                />
+              </div>
             </div>
             <div className="form-control w-full">
               <label className="label">
                 <span className="label-text">Description</span>
               </label>
-              <textarea className="textarea textarea-bordered" placeholder="Description" {...register("description", { required: "Description is required" })}></textarea>
+              <textarea
+                className="textarea textarea-bordered"
+                placeholder="Description"
+                {...register("description", { required: "Description is required" })}
+              ></textarea>
             </div>
 
             <div className="form-control mt-6">
