@@ -53,7 +53,7 @@ const AllBuyer = () => {
               <th></th>
               <th>Name</th>
               <th>Email</th>
-              <th>Admin</th>
+              <th>Verify</th>
               <th>Delete</th>
             </tr>
           </thead>

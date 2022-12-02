@@ -1,4 +1,4 @@
-import colorNames from "daisyui/src/colors/colorNames";
+
 import React, { useContext } from "react";
 import toast from "react-hot-toast";
 import { AuthContext } from "../Contexts/AuthProvider";

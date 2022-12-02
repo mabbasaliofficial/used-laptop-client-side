@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../Contexts/AuthProvider";
 import useTitle from "../Hooks/useTitle";
 
 const AddProducts = () => {
+  const {user} = useContext(AuthContext)
   useTitle("Add Products");
   const imgHostKey = process.env.REACT_APP_imgbb_key;
   const {
@@ -12,11 +15,13 @@ const AddProducts = () => {
     handleSubmit,
   } = useForm();
 
+  const navigate = useNavigate()
+
   const handleProducts = (data) => {
     const image = data.image[0];
     const formData = new FormData();
     formData.append("image", image);
-    const url = `https://api.imgbb.com/1/upload?expiration=600&key=${imgHostKey}`;
+    const url = `https://api.imgbb.com/1/upload?key=${imgHostKey}`;
     fetch(url, {
       method: "POST",
       body: formData,
@@ -31,8 +36,8 @@ const AddProducts = () => {
             description: data.description,
             resale_price: data.resale_price,
             original_price: data.original_price,
-            seller: data.seller,
-            email: data.email,
+            seller: user?.displayName,
+            email: user?.email,
             image: imgData.data.url,
             location: data.location,
             post_time: data.post_time,
@@ -48,9 +53,8 @@ const AddProducts = () => {
           })
             .then((res) => res.json())
             .then((data) => {
-              
                 toast.success('Product Added Successfully')
-              
+               navigate('/dashboard/myproducts')
             });
         }
       });
@@ -68,8 +72,10 @@ const AddProducts = () => {
                   <span className="label-text">Name</span>
                 </label>
                 <input
-                  {...register("seller", { required: "Name is required" })}
+                  {...register("seller")}
                   type="text"
+                  value={user?.displayName}
+                  disabled
                   placeholder="Name"
                   className="input input-bordered"
                 />
@@ -79,8 +85,10 @@ const AddProducts = () => {
                   <span className="label-text">Email</span>
                 </label>
                 <input
-                  {...register("email", { required: "Email is required" })}
+                  {...register("email")}
                   type="email"
+                  value={user?.email}
+                  disabled
                   placeholder="Email"
                   className="input input-bordered"
                 />

@@ -18,7 +18,6 @@ import PaymentPage from "../Pages/PaymentPage";
 import SellerRoute from "./SellerRoute";
 import AddProducts from "../Pages/AddProducts";
 import MyProducts from "../Pages/MyProducts";
-import MyBuyer from "../Pages/MyBuyer";
 import UserProfile from "../Pages/UserProfile";
 import BuyerRoute from "./BuyerRoute";
 import MyWishList from "../Pages/MyWishList";
@@ -118,14 +117,6 @@ const router = createBrowserRouter([
         element: (
           <SellerRoute>
             <MyProducts />
-          </SellerRoute>
-        ),
-      },
-      {
-        path: "/dashboard/mybuyers",
-        element: (
-          <SellerRoute>
-            <MyBuyer />
           </SellerRoute>
         ),
       },

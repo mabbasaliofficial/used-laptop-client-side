@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import toast from "react-hot-toast";
-import { FaInfoCircle, FaQuestionCircle, FaTrashAlt } from "react-icons/fa";
+import { FaCheckCircle, FaInfoCircle, FaQuestionCircle, FaTrashAlt } from "react-icons/fa";
 import useTitle from "../Hooks/useTitle";
 
 const AllSeller = () => {
@@ -63,7 +63,8 @@ const AllSeller = () => {
                   <th>{i + 1}</th>
                   <td>
                     <div>
-                      <div className="font-bold">{user.displayName}</div>
+                    { user?.verify === 'verified' ? <div className="font-bold flex items-center"><span>{user.displayName}</span> <span><FaCheckCircle className="text-blue-400 ml-1"/></span></div> :
+                      <div className="font-bold">{user.displayName}</div>}
                     </div>
                   </td>
                   <td>
