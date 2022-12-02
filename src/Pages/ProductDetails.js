@@ -1,4 +1,4 @@
-import React, {  useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import {
   FaUserCircle,
@@ -31,7 +31,7 @@ const ProductDetails = () => {
   } = product;
 
   useEffect(() => {
-    fetch(`http://localhost:5000/seller/verify/${email}`)
+    fetch(`https://laptop-data.vercel.app/seller/verify/${email}`)
       .then((res) => res.json())
       .then((data) => {
         setVerify(data);
@@ -51,9 +51,7 @@ const ProductDetails = () => {
                 <FaUserCircle />{" "}
                 {verify?.verify ? (
                   <div className="flex items-center">
-                    <span className="mx-2">
-                      Seller : {seller} 
-                    </span>
+                    <span className="mx-2">Seller : {seller}</span>
                     <FaCheckCircle className="text-blue-400" />
                   </div>
                 ) : (

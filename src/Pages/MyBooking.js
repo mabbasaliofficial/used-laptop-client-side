@@ -6,9 +6,9 @@ import { AuthContext } from "../Contexts/AuthProvider";
 import useTitle from "../Hooks/useTitle";
 
 const MyBooking = () => {
-  useTitle('My Booking');
+  useTitle("My Booking");
   const { user } = useContext(AuthContext);
-  const url = `http://localhost:5000/buying?email=${user?.email}`;
+  const url = `https://laptop-data.vercel.app/buying?email=${user?.email}`;
   const { data: buying = [] } = useQuery({
     queryKey: ["buying", user?.email],
     queryFn: async () => {
@@ -51,14 +51,17 @@ const MyBooking = () => {
                   </td>
                   <td>{item.price}TK</td>
                   <td>
-                    { item.paid ? <p>Paid</p> :
+                    {item.paid ? (
+                      <p>Paid</p>
+                    ) : (
                       <Link
-                      to={`/dashboard/payment/${item._id}`}
-                      className=" tooltip tooltip-secondary text-4xl text-center text-secondary"
-                      data-tip="Payment Now..."
-                    >
-                      <FaMoneyCheckAlt />
-                    </Link>}
+                        to={`/dashboard/payment/${item._id}`}
+                        className=" tooltip tooltip-secondary text-4xl text-center text-secondary"
+                        data-tip="Payment Now..."
+                      >
+                        <FaMoneyCheckAlt />
+                      </Link>
+                    )}
                   </td>
                 </tr>
               ))}

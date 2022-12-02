@@ -6,7 +6,7 @@ const AdvertizeItems = () => {
   const { data: products = [], isLoading, refetch } = useQuery({
     queryKey: ["advertizeproducts"],
     queryFn: () =>
-      fetch("http://localhost:5000/advertizeproducts").then((res) => res.json()),
+      fetch("https://laptop-data.vercel.app/advertizeproducts").then((res) => res.json()),
   });
   if (isLoading) {
     return <progress className="progress w-full"></progress>;

@@ -8,30 +8,28 @@ import useTitle from "../Hooks/useTitle";
 const MyProducts = () => {
   useTitle("My Products");
   const { user } = useContext(AuthContext);
-  const { data: products , refetch} = useQuery({
+  const { data: products, refetch } = useQuery({
     queryKey: ["products"],
     queryFn: async () => {
       try {
-        const res = await fetch(`http://localhost:5000/product/?email=${user?.email}`);
+        const res = await fetch(`https://laptop-data.vercel.app/product/?email=${user?.email}`);
         const data = await res.json();
         return data;
       } catch (error) {}
     },
   });
   const handleAdvertize = (id) => {
-    fetch(`http://localhost:5000/product/${id}`, {
+    fetch(`https://laptop-data.vercel.app/product/${id}`, {
       method: "PUT",
-     
     })
       .then((res) => res.json())
       .then((data) => {
-          toast.success("Advertize Successfully");
-          refetch();
-        
+        toast.success("Advertize Successfully");
+        refetch();
       });
   };
   const handleDelete = (id) => {
-    fetch(`http://localhost:5000/product/${id}`, {
+    fetch(`https://laptop-data.vercel.app/product/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
@@ -62,20 +60,24 @@ const MyProducts = () => {
                 <tr key={product._id}>
                   <th>{i + 1}</th>
                   <td>
-                        
-                          <img src={product.image} className="rounded w-16 h-12" alt={product.title} />
-                        
+                    <img src={product.image} className="rounded w-16 h-12" alt={product.title} />
                   </td>
                   <td>
                     <div>
-                      <div className="font-bold">{product.title.length > 20 ? <p>{product.title.slice(0, 20) + '...'} </p> : <p>{product.title}</p>}</div>
+                      <div className="font-bold">
+                        {product.title.length > 20 ? (
+                          <p>{product.title.slice(0, 20) + "..."} </p>
+                        ) : (
+                          <p>{product.title}</p>
+                        )}
+                      </div>
                     </div>
                   </td>
-                  
+
                   <td>
                     {product?.advertize !== "advertized" ? (
                       <button
-                          onClick={() => handleAdvertize(product._id)}
+                        onClick={() => handleAdvertize(product._id)}
                         className=" tooltip tooltip-primary text-4xl text-center text-primary"
                         data-tip="Advertize Product?"
                       >

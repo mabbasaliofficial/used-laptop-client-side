@@ -87,13 +87,18 @@ const AllUsers = () => {
                     )}
                   </td>
                   <td>
+                  {
+                    user?.role === 'admin' ? <button    className="btn-outline p-2 rounded-full tooltip tooltip-disabled"
+                    data-tip="Admin Are Not Deletable"
+                    disabled ><FaTrashAlt className="disabled text-2xl" /></button> :
                     <button
-                      onClick={() => handleDelete(user._id)}
-                      className="btn-outline p-2 rounded-full tooltip tooltip-error"
-                      data-tip="Delete User?"
-                    >
-                      <FaTrashAlt className="text-error text-2xl" />
-                    </button>
+                    onClick={() => handleDelete(user._id)}
+                    className="btn-outline p-2 rounded-full tooltip tooltip-error"
+                    data-tip="Delete User?"
+                    disabled={user?.role === "admin"}
+                  >
+                    <FaTrashAlt className="text-error text-2xl" />
+                  </button>}
                   </td>
                 </tr>
               ))}
