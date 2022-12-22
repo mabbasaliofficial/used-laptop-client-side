@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Contexts/AuthProvider";
 import useTitle from "../Hooks/useTitle";
 import useToken from "../Hooks/useToken";
+import { FcGoogle } from "react-icons/fc";
 
 const Login = () => {
   useTitle('Login');
@@ -123,7 +124,7 @@ const Login = () => {
           </p>
           <div className="divider">OR</div>
           <button onClick={googleLogin} className="btn  btn-outline btn-secondary">
-            Continue with google
+          <FcGoogle className="mx-2 text-3xl"/> Continue with google
           </button>
         </div>
       </div>

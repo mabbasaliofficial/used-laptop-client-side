@@ -5,6 +5,7 @@ import { AuthContext } from "../Contexts/AuthProvider";
 import toast from "react-hot-toast";
 import useToken from "../Hooks/useToken";
 import useTitle from "../Hooks/useTitle";
+import { FcGoogle } from "react-icons/fc";
 
 const Signup = () => {
   useTitle('Sign Up');
@@ -147,8 +148,8 @@ const Signup = () => {
             </Link>
           </p>
           <div className="divider">OR</div>
-          <button onClick={googleLogin} className="btn  btn-outline btn-secondary">
-            Continue with google
+          <button onClick={googleLogin} className="btn btn-outline">
+           <FcGoogle className="mx-2 text-3xl"/> Continue with google
           </button>
         </div>
       </div>
